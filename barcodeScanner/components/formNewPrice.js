@@ -5,7 +5,7 @@ import axios from "axios";
 import { Input, FormControl, WarningOutlineIcon, Box, Center, NativeBaseProvider } from "native-base";
 
 export default function FormNewPrice({id,codigo,nombre,precio}){
-
+    const [newPrice,setNewPrice]=useState(precio);
     const [article,setArticle]=useState({id:id,
       codigo:codigo,
       nombre:nombre,precio:precio})
@@ -13,6 +13,7 @@ export default function FormNewPrice({id,codigo,nombre,precio}){
 
     const handleSubmit=()=>{
         // console.log("Codigo:",code," \nNombre:",name, "\nPrecio:",price)
+       
         try {
           axios
             .put(
@@ -30,7 +31,9 @@ export default function FormNewPrice({id,codigo,nombre,precio}){
      
    
 const handlePriceChange=text=>{
-  setPrice(text);
+  setArticle({id:id,
+    codigo:codigo,
+    nombre:nombre,precio:text})
  
 }
 
@@ -41,9 +44,9 @@ const handlePriceChange=text=>{
 <Box alignItems="center">
 <FormControl  w="75%" maxW="300px">
 <FormControl.Label>Codigo</FormControl.Label>
-<Input value={article.codigo} />
+<Input disabled value={article.codigo} />
 <FormControl.Label>Nombre</FormControl.Label>
-<Input value={article.nombre}  />
+<Input disabled value={article.nombre}  />
 <FormControl.Label>Precio</FormControl.Label>
 <Input value={article.precio}  onChangeText={handlePriceChange} />
 

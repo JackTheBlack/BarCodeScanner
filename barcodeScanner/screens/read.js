@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from "axios";
-import { Alert, VStack, HStack,Box} from "native-base";
+import { Box, Alert, VStack, HStack} from "native-base";
 
 export default function Read({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -62,12 +62,13 @@ const handleAddProduct=()=>{
   }
 
   return (
-    <View style={styles.container}>
-
-      <BarCodeScanner
+    <View  style={styles.container}>
+      <View style={styles.barCode} >
+    <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
+        style={styles.barCode}
       />
+      </View>  
       {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
       <Button title="Home" onPress={()=>navigation.navigate("Home")}/>
     </View>
@@ -81,6 +82,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+   
   },
+
+  barCode: {
+  
+    alignItems: 'center',
+    justifyContent:'center',
+    height:500, width:300,
+   
+
+    overflow:'hidden',
+    borderRadius:40,
+   
+  },
+
 });
 
