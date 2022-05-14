@@ -100,16 +100,17 @@ const handlePriceChange=text=>{
          
         </Modal> 
 
+        <View style={styles.scannerBox}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
+        style={{width:700, height:700} }
       />
+      </View>
       {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
       <Button title="Home" onPress={()=>navigation.navigate("Home")}/>
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -118,11 +119,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input:{
-        borderWidth:10,
-        borderColor:"#ddd",
-        padding:10,
-        fontSize:10,
-        borderRadius:6,
-  },
+  scannerBox:{
+    
+     alignItems: 'center',
+    justifyContent: 'center',
+    height:400,
+    width:400,
+    overflow:'hidden',
+    borderRadius:30,
+    backgroundColor:'tomato'
+    
+  
+
+  }
 });
